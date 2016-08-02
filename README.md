@@ -13,9 +13,9 @@ The `downloadDataFromQualtrics()` function does this for you, via the Qualtrics 
 # Setup:
 
 1. Install cURL. This should be standard on Mac and Unix platforms; Windows users might have to install it.
-2. Requires access to Qualtrics API (<a href="https://api.qualtrics.com/docs/authentication">details</a>)
+2. Requires access to Qualtrics API 
   * At least for my institution, I had to contact the IT Service Desk to request access to the API.
-3. Obtain your **API Token**, store it in a safe place. (Importantly, as with all security tokens, NEVER upload this to Github or any other public repository).
+3. Obtain your **API Token**, store it in a safe place. (Importantly, as with all security tokens, NEVER upload this to Github or any other public repository). Refer to <a href="https://api.qualtrics.com/docs/authentication">this page</a> for details on how to obtain your API Token
 4. While you're on the Qualtrics ID page, store the **Survey ID** of the particular survey you want to download.
 
 
@@ -25,7 +25,7 @@ prerequisites: `curl` and `jsonlite`
 
 1) Because of security issues, I don't want users to hardcode their API Tokens and Survey IDs into the function. Instead, edit the `sample_apiTokenFile` with your API Token and Survey ID. Rename it "apiTokenFile" (or whatever you wish, I'm assuming it's "apiTokenFile"), and make sure that this file is never committed to a public repo.
 
-2) In your R script, import the helper function. It takes in one argument, which is the "apiTokenFile". After you call it, it should do everything for you (request an export, check that the export is ready for download, download the zip file, unzip the zip file, read the csv into R after removing the 2nd and 3rd row):
+2) In your R script, import the helper function. It takes in one argument, the "apiTokenFile". After you call the function, it should do everything for you (request an export, check that the export is ready for download, download the zip file, unzip the zip file, read the csv into R after removing the 2nd and 3rd row):
 ```r
 source("downloadDataFromQualtrics.r")
 dSurvey = downloadDataFromQualtrics("apiTokenFile")
@@ -35,12 +35,12 @@ dSurvey = downloadDataFromQualtrics("apiTokenFile")
 ```r
 Done unzipping the data to filename.csv
 ```
-(It should be the name of the survey in Qualtrics)
+It should be the name of the survey in Qualtrics. Scroll to the bottom for sample code on reading this csv into R (i.e., removing the pesky 2nd and 3rd row).
 
 
 # Using plain old curl
 
-If you're comfortable using the command line (Terminal) directly, then you can use cURL directly to download the data. These examples are taken more or less directly from the Qualtrics API documentation, and the downloadDataFromQualtrics.R code is basically the below steps, wrapped in nice R code.
+If you're comfortable using the command line (Terminal) directly, then you can use cURL to download the data. These examples are taken more or less directly from the Qualtrics API documentation, and the downloadDataFromQualtrics.R code is basically the below steps, wrapped in nice R code.
 
 1) Open Terminal. use cURL to send a "csv export" request to Qualtrics (<a href="https://api.qualtrics.com/docs/csv">details</a>): 
 ```
@@ -61,7 +61,9 @@ Use cURL again with this Result ID to download the file into a .zip file. (<a hr
   "https://yourdatacenterid.qualtrics.com/API/v3/responseexports/***RESULT_ID***/file" -o response.zip 
 ```
 
-3) After that, read it into R! 
+3) Unzip the file (response.zip)
+
+4) After that, read the .csv into R! 
 ```r
   csvFilename = "survey_name.csv" 
   dSurvey = read.csv(csvFilename, header=FALSE, skip=3) 
