@@ -5,8 +5,8 @@ Helper functions that reads survey data directly from Qualtrics into R (via the 
 When using Qualtrics, here's the basic workflow to get your data, usually done using the Qualtrics website. (Qualtrics users should be familiar with this.)
 
 - Request a data export (into .csv, or Excel, or SPSS, etc).
-- When finished, download onto your computer
-- Some minor cleaning, then read into R
+- When Qualtrics is finished exporting your data, you get a link to download the data onto your computer
+- You'll need to do some minor cleaning before you can read it into R
 
 The `downloadDataFromQualtrics()` function does this for you, via the Qualtrics API.
 
