@@ -62,7 +62,7 @@ If you're comfortable using the command line (Terminal) directly, then you can u
 ```
 
 Use cURL again with this Result ID to download the file into a .zip file. (<a href="https://api.qualtrics.com/docs/get-response-export">details</a>) You may have to wait a little while for Qualtrics to export the data.
-(Note, you can also check on the status of the export using <a href="https://api.qualtrics.com/docs/get-response-export-1">this call</a>; but it usually doesn't take that long in my experience. It might take longer if there are a lot more participants or a lot more questions.)
+(Note, you can also check on the status of the export using <a href="https://api.qualtrics.com/docs/get-response-export-1">this call</a>; but it usually doesn't take that long in my experience. It might take longer if there are a lot more participants or a lot more questions.) [Note: I found that Qualtrics might not export if there are survey responses in progress.]
 ```
   curl -X GET -H "Content-Type: application/json" -H "X-API-TOKEN: ***API_TOKEN***" 
   "https://yourdatacenterid.qualtrics.com/API/v3/responseexports/***RESULT_ID***/file" -o response.zip 
