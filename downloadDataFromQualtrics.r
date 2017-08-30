@@ -47,7 +47,7 @@ downloadDataFromQualtrics <- function(apiTokenFile) {
   cat(paste("Done unzipping the data to ", getwd(), "/", outputFilename, "\n", sep=""))
   
   # Reading in the survey file into dSurvey and returning it
-  dSurvey = read.csv(paste(getwd(), "/", outputFilename, sep=""), header=FALSE, skip=3) 
+  dSurvey = read.csv(paste(getwd(), "/", outputFilename, sep=""), header=FALSE, skip=2) 
   variableNames = read.csv(paste(getwd(), "/", outputFilename, sep=""), header=TRUE, nrows=1) 
   colnames(dSurvey) = colnames(variableNames) 
   
